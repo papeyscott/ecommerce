@@ -85,6 +85,16 @@ class Utils{
 	}
 
 
+	public static function rowCount($dbconn,$place){
+		$stmt = $dbconn->prepare("SELECT count(*) FROM $place ");
+		$stmt->execute();
+		$row = $stmt->fetch(PDO::FETCH_NUM);
+		$rowCount = $row[0];
+		return $rowCount;
+
+	}
+
+
 	public static function addCategory($dbconn, $input) {
 		$stmt = $dbconn->prepare("INSERT INTO category(category_name) VALUES(:name)");
 		$stmt->bindParam(":name", $input['cat_name']);
@@ -231,14 +241,21 @@ class Utils{
 
 		$data = [
 					':loc'=> $dest,
-					':bid'=> $input['img']
+					':bid'=> $input['img_loc']
 				];
-				print_r($stmt); exit();
+			
 		$stmt->execute($data);
 
 	}
 
-		
+
+
+	public static function deleteProduct($dbconn, $input) {
+		$stmt = $dbconn->prepare("DELETE FROM book WHERE book_id=:bid");
+		$stmt->bindParam("bid", $input);
+
+		$stmt->execute();
+	}
 
 
 }

@@ -7,18 +7,22 @@
 <body>
 	<section>
 		<div class="mast">
-			<h1>T<span>SSB</span></h1>
-		</div>
+			<h1><a href="dashboard.php">T<span>SSB</span> Home </a></h1>
+		
 			<nav>
 				<ul class="clearfix">
-					<li><a href="addcategory.php" <?php Utils::curNav("addcategory.php"); ?>>add category</a></li>
-					<li><a href="view_category.php" <?php Utils::curNav("view_category.php"); ?>>view category</a></li>
-					<li><a href="addproduct.php" <?php Utils::curNav("addproduct.php"); ?>>add product</a></li>
-					<li><a href="viewproduct.php" <?php Utils::curNav("viewproduct.php"); ?>>view product</a></li>
+					<li><a href="admin_dashboard.php">Dashboard</a></li>
+					<li><a href="addcategory.php" >Add Category</a></li>
+					<li><a href="view_category.php">View Category</a></li>
+					<li><a href="addproduct.php">Add Product</a></li>
+					<li><a href="viewproduct.php" >View Product</a></li>
+					<li><a href="admin_logout.php">Logout</a></li>
 				</ul>
 			</nav>
 		</div>
 	</section>
+
+	
 
 </body>
 </html>
