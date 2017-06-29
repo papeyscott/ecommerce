@@ -207,7 +207,7 @@ class Utils{
 
 	public static function editProduct($dbconn, $input){
 
-		$stmt = $dbconn->prepare("UPDATE books SET title=:ti, author=:au, category_id=:ci, price=:pr, year=:yr, isbn=:is WHERE book_id=:bid");
+		$stmt = $dbconn->prepare("UPDATE book SET title=:ti, author=:au, category_id=:ci, price=:pr, year=:yr, isbn=:is WHERE book_id=:bid");
 
 		$data = [
 					':ti'=> $input['title'],
@@ -217,15 +217,28 @@ class Utils{
 					':yr'=> $input['year'],
 					':is'=> $input['isbn'],
 					
-					':bid'=> $edible['bid']
+					':bid'=> $input['bid']
 
 				];
 
 		$stmt->execute($data);
-
-		
 	}
 
+
+	public static function editProductImage($dbconn, $input, $dest){
+
+		$stmt = $dbconn->prepare("UPDATE book SET img_loc=:loc WHERE book_id=:bid");
+
+		$data = [
+					':loc'=> $dest,
+					':bid'=> $input['img']
+				];
+				print_r($stmt); exit();
+		$stmt->execute($data);
+
+	}
+
+		
 
 
 }

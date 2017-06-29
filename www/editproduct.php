@@ -8,7 +8,7 @@
 	Utils::checkLogin();
 
 	# title
-	$title = "Store: Add Product";
+	$title = "Store: Edit Product";
 
 	# include dashboard header
 	include 'includes/dashboard_header.php';
@@ -31,7 +31,7 @@
 	$errors = [];
 
 	# be sure if the user clicked the submit button
-	if(array_key_exists('add', $_POST)) {
+	if(array_key_exists('edit', $_POST)) {
 		if(empty($_POST['title'])) {
 			$errors['title'] = "please enter a book title";
 		}
@@ -78,44 +78,44 @@
 <div class="wrapper">
 	<div id="stream">
 		
-		<h1 id="register-label">Add Product</h1>
+		<h1 id="register-label">Edit Product</h1>
 		<hr>
-		<form id="register"  action ="addproduct.php" method ="POST" enctype="multipart/form-data">
+		<form id="register"  action ="<?php echo "editproduct.php?bid=".$bookID; ?>" method ="POST" ">
 			<div>
 				<?php Utils::displayError('title', $errors); ?>
 				<label>title:</label>
-				<input type="text" name="title" placeholder="title">
+				<input type="text" name="title" placeholder="title" value="<?php echo $item['title']; ?>">
 			</div>
 
 			<div>
 				<?php Utils::displayError('author', $errors); ?>
 				<label>Author:</label>
-				<input type="text" name="author" placeholder="Author">
+				<input type="text" name="author" placeholder="Author" value="<?php echo $item['author']; ?>">
 			</div>
 
 			<div>
 				<?php Utils::displayError('price', $errors); ?>
 				<label>Price:</label>
-				<input type="text" name="price" placeholder="Price">
+				<input type="text" name="price" placeholder="Price" value="<?php echo $item['price']; ?>">
 			</div>
 
 			<div>
 				<?php Utils::displayError('year', $errors); ?>
 				<label>Year Of Publication</label>
-					<input type="text" name="year" placeholder="Enter Year of Publication">
+					<input type="text" name="year" placeholder="Enter Year of Publication" value="<?php echo $item['year']; ?>">
 			</div>
 
 			<div>
 			<?php Utils::displayError('isbn', $errors); ?>
 			<label>ISBN</label>
-				<input type="text" name="isbn" placeholder="Enter Book's ISBN">
+				<input type="text" name="isbn" placeholder="Enter Book's ISBN" value="<?php echo $item['isbn']; ?>">
 			</div>
 
 			<div>
 				<?php Utils::displayError('cat', $errors); ?>
 				<label>Select Category:</label>
 				<select name="cat">
-				<option>Select Category</option>
+				<option value="<?php echo $category['category_id']; ?>"><?php echo $category['category_name']; ?></option>
 					<?php
 						Utils::fetchCategories($conn, null, function($data) {
 							$result = "";
@@ -130,10 +130,10 @@
 				</select>
 			</div>
 
-			<input type="submit" name="add" value="add">
+			<input type="submit" name="edit" value="edit">
 
 		</form>
-			<h4 class="jumpto">Upload new image: <a href="changeimage.php">change</a></h4>
+			<h4 class="jumpto">Upload new image: <a href="<?php echo "changeimage.php?bid=".$item['book_id'];?>">change</a></h4>
 
 	</div>
 </div>
